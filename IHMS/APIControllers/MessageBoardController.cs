@@ -91,9 +91,9 @@ namespace IHMS.APIControllers
                     dbConnection.Open();
 
                     // log 或 console
-                    Debug.WriteLine($"Received message: Title={message.Title}, Contents={message.Contents}, Category={message.Category}, MemberId={message.member_id}");
+                    Debug.WriteLine($"Received message: Title={message.title}, Contents={message.contents}, Category={message.category}, MemberId={message.member_id}");
 
-                    message.Time = DateTime.Now;
+                    message.time = DateTime.Now;
 
                     var query = "INSERT INTO [dbo].[message board] (title, contents, category, member_id, time) " +
                         "VALUES (@Title, @Contents, @Category, @Member_Id, @Time); SELECT CAST(SCOPE_IDENTITY() as int);";
@@ -185,12 +185,12 @@ namespace IHMS.APIControllers
     public class Message
     {
         public int message_id { get; set; }
-        public string Title { get; set; }
-        public string Contents { get; set; }
-        public string Category { get; set; }
+        public string? title { get; set; }
+        public string? contents { get; set; }
+        public string? category { get; set; }
         public int member_id { get; set; }
-        public DateTime Time { get; set; }
-        public string Name { get; set; }
-       
+        public DateTime time { get; set; }
+        public string? Name { get; set; }
+
     }
 }
