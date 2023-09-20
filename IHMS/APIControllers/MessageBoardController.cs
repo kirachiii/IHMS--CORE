@@ -148,8 +148,9 @@ namespace IHMS.APIControllers
                 using (IDbConnection dbConnection = new SqlConnection(_connectionString))
                 {
                     dbConnection.Open();
+                    message.time = DateTime.Now;
                     var query = "UPDATE [dbo].[message board] SET title = @Title, contents = @Contents, " +
-                        "category = @Category, member_id = @MemberId, time = @Time WHERE message_id = @MessageId";
+                        "category = @Category, member_id = @Member_id, time = @Time WHERE message_id = @Message_id";
                     message.message_id = id; // 確保傳入的 Message 物件的 MessageId 正確
                     dbConnection.Execute(query, message);
                     return Ok(message);
@@ -157,7 +158,7 @@ namespace IHMS.APIControllers
             }
             catch (Exception ex)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, "更新留言板資料失敗。");
+                return StatusCode(StatusCodes.Status500InternalServerError, $"更新留言板資料失敗。Error: {ex.Message}");
             }
         }
 
